@@ -4,16 +4,15 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.Image
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.height
-import androidx.compose.material.MaterialTheme
-import androidx.compose.material.Surface
-import androidx.compose.material.Text
+import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material.*
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Email
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
@@ -32,9 +31,19 @@ class MainActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colors.background
                 ) {
-                    Column(horizontalAlignment = Alignment.CenterHorizontally) {
+                    Column(
+                        horizontalAlignment = Alignment.CenterHorizontally,
+                        modifier = Modifier.padding(20.dp)
+                    ) {
                         //プロフィール画像
-                        Image(painter = painterResource(id = R.drawable.img_profile), contentDescription = "my profile image")
+                        Image(
+                            painter = painterResource(id = R.drawable.img_profile), 
+                            contentDescription = "my profile image",
+                            modifier = Modifier
+                                .size(100.dp)
+                                .clip(RoundedCornerShape(30.dp))
+                        )
+                        Spacer(modifier = Modifier.height(20.dp))
                         //名前
                         Text(
                             text = "でんのこ",
@@ -49,8 +58,60 @@ class MainActivity : ComponentActivity() {
                             color = Color.Gray,
                             fontSize = 16.sp,
                         )
-                    }
+                        Spacer(modifier = Modifier.height(20.dp))
+                        
+                        Column(
+                            horizontalAlignment = Alignment.Start,
+                            modifier = Modifier.fillMaxWidth(),
+                        ) {
+                            //会社名
+                            Text(
+                                text = "C0de",
+                                fontSize = 26.sp,
+                                fontWeight = FontWeight.Bold,
+                            )
+                            Spacer(modifier = Modifier.height(10.dp))
+                            //部署、グループ名
+                            Text(
+                                text = "Android開発班",
+                                color = Color.Gray,
+                                fontSize = 16.sp,
+                            )
+                            Spacer(modifier = Modifier.height(20.dp))
+                            //メール(アイコンと文字)
+                            Row(verticalAlignment = Alignment.CenterVertically) {
+                                Icon(
+                                    imageVector = Icons.Default.Email, 
+                                    contentDescription = "email"
+                                )
+                                Spacer(modifier = Modifier.width(10.dp))
+                                Text(
+                                    text = "Email",
+                                    fontSize = 14.sp,
+                                    fontWeight = FontWeight.Bold
+                                )
+                            }
+                            Spacer(modifier = Modifier.height(10.dp))
+                            Text(
+                                text = "sample@gmail.com",
+                                fontSize = 16.sp,
+                            )
+                            Spacer(modifier = Modifier.height(5.dp))
 
+                            Divider(
+                                modifier = Modifier.clip(RoundedCornerShape(1000.dp)),
+                                thickness = 2.dp,
+                            )
+                            Spacer(modifier = Modifier.height(20.dp))
+                            //詳細ボタン
+                            Button(
+                                modifier = Modifier.fillMaxWidth(),
+                                onClick = { /*TODO*/ }
+                            ) {
+                                Text(text = "詳細を表示", color = Color.White)
+                            }
+                        }
+                    }
                 }
             }
         }
